@@ -5,11 +5,11 @@ import bannerImg from "@/assets/banner.jpg";
 
 const Banner = () => {
   return (
-    <div className="bg-slate-100">
+    <div className="bg-slate-100 dark:bg-gray-800 dark:text-white rounded-md">
       <div className="px-4 py-8 lg:px-8  grid grid-cols-1 md:grid-cols-2 items-center gap-8">
         {/* image  */}
         <div>
-          <Image src={bannerImg} alt="banner" />
+          <Image src={bannerImg} className="rounded-md" alt="banner" />
         </div>
         <div className="space-y-4 flex flex-col">
           <h4 className="text-sm font-medium text-gray-500">Technology</h4>

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import newsImage from "@/assets/banner.jpg";
 import { Button } from "../ui/button";
 import { NewsCardProps } from "@/types/news";
 
@@ -13,6 +12,7 @@ const NewsCard = ({item}:NewsCardProps) => {
           width={500}
           height={500}
           alt="News Image"
+          priority
           className="mb-5 md:h-56 rounded hover:scale-105 cursor-pointer transition-all duration-200"
         />
       </Link>

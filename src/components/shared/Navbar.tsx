@@ -3,26 +3,26 @@ import Link from "next/link";
 import {
   NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import { Switch } from "../ui/switch";
 import { Button } from "../ui/button";
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { usePathname } from "next/navigation";
 
 import MobileMenu from './MobileMenu';
+import { useContext } from "react";
+import { ThemeContext } from "@/context/themeContext";
 
 const Navbar = () => {
   const pathname = usePathname()
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const {isDarkMode,toggleTheme} : any = useContext(ThemeContext)
 
   return (
-    <header className="py-4 shadow-md">
+    <header className={`py-4 shadow-md ${isDarkMode? "bg-gray-900 text-white " : ""}`}>
       <nav className="max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
         {/* logo  */}
         <div className="text-xl font-semibold">
@@ -32,47 +32,45 @@ const Navbar = () => {
         <NavigationMenu className="hidden lg:flex">
           <NavigationMenuList>
             <NavigationMenuItem className="flex items-center space-x-8">
-              <NavigationMenuLink href="/news" className={`hover:text-red-500 ${pathname === "/news" ? "text-red-500 font-semibold":""}`}>
+              <Link href="/news" className={`hover:text-red-500 ${pathname === "/news" ? "text-red-500 font-semibold":""}`}>
                 News
-              </NavigationMenuLink>
-              <NavigationMenuTrigger>
-                 <Link href="/services" className="text-gray-700">
-                  Services
-                </Link>
+              </Link>
+              <NavigationMenuTrigger className="dark:bg-slate-900 dark:text-white">
+                 Services
               </NavigationMenuTrigger>
 
               <NavigationMenuContent>
-                <ul className="text-gray-600 shadow-md rounded-md px-5 py-4 space-y-2 ">
+                <ul className=" shadow-md rounded-md px-5 py-4 space-y-2 ">
                   <li>
-                    <NavigationMenuLink href="/services/web">
+                    <Link href="/services/web">
                       Web Development
-                    </NavigationMenuLink>
+                    </Link>
                   </li>
                   <li>
                     {" "}
-                    <NavigationMenuLink href="/services/app">
+                    <Link href="/services/app">
                       App Development
-                    </NavigationMenuLink>
+                    </Link>
                   </li>
                   <li>
-                    <NavigationMenuLink href="/services/seo">
+                    <Link href="/services/seo">
                       Seo
-                    </NavigationMenuLink>
+                    </Link>
                   </li>
                 </ul>
               </NavigationMenuContent>
-              <NavigationMenuLink href="/about" className={`hover:text-red-500 ${pathname === "/about" ? "text-red-500 font-semibold":""}`}>
+              <Link href="/about" className={`hover:text-red-500 ${pathname === "/about" ? "text-red-500 font-semibold":""}`}>
                 About
-              </NavigationMenuLink>
-              <NavigationMenuLink href="/contact" className={`hover:text-red-500 ${pathname === "/contact" ? "text-red-500 font-semibold":""}`}>
+              </Link>
+              <Link href="/contact" className={`hover:text-red-500 ${pathname === "/contact" ? "text-red-500 font-semibold":""}`}>
                 Contact
-              </NavigationMenuLink>
+              </Link>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
         {/* color choese and login button  */}
         <div className="hidden lg:flex items-center space-x-4">
-          <div className="flex items-center">
+          <div onClick={toggleTheme} className="flex items-center">
             <span className="mr-2">Dark Mode</span>
             <Switch></Switch>
           </div>
